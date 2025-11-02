@@ -1776,165 +1776,166 @@ export default function Home() {
 
       {/* Features Section */}
       <section className="py-20 relative overflow-hidden" id="features">
-        <div className="container mx-auto px-4 lg:px-8">
+  <div className="container mx-auto px-4 lg:px-8">
+    <motion.div
+      initial={{ scale: 0, rotate: -180 }}
+      whileInView={{ scale: 1, rotate: 0 }}
+      viewport={{ once: true }}
+      transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 hidden md:block"
+    >
+      <div className="relative">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+          whileHover={{ scale: 1.2 }}
+          className="h-24 w-24 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/50 relative"
+          style={{ transformStyle: "preserve-3d" }}
+        >
           <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 hidden md:block"
+            className="absolute inset-0 rounded-2xl bg-primary opacity-50 blur-xl"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+          />
+          <svg
+            className="h-12 w-12 text-primary-foreground relative z-10"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <div className="relative">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                whileHover={{ scale: 1.2 }}
-                className="h-24 w-24 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/50 relative"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <motion.div
-                  className="absolute inset-0 rounded-2xl bg-primary opacity-50 blur-xl"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                />
-                <svg
-                  className="h-12 w-12 text-primary-foreground relative z-10"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6 2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+            />
+          </svg>
+        </motion.div>
+        {[0, 90, 180, 270].map((angle) => (
+          <motion.div
+            key={angle}
+            className="absolute top-1/2 left-1/2 w-32 h-0.5 bg-gradient-to-r from-primary/50 to-transparent origin-left"
+            style={{ rotate: angle }}
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 + angle * 0.001 }}
+          />
+        ))}
+      </div>
+    </motion.div>
+
+    {/* Feature Cards in 2x2 Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+      {[
+        {
+          icon: "code",
+          title: "Multi-Template & Multi-Language Support",
+          desc: "Enables developers to work across different technology stacks with a unified command interface.",
+          color: "primary",
+          delay: 0,
+        },
+        {
+          icon: "bulb",
+          title: "Interactive Configuration & Prompting",
+          desc: "Provides a user-friendly experience and minimizes errors from manual configuration.",
+          color: "blue",
+          delay: 0.1,
+        },
+        {
+          icon: "module",
+          title: "Component & Module Generation",
+          desc: "Significantly speeds up repetitive coding tasks and enforces best practices.",
+          color: "red",
+          delay: 0.2,
+        },
+        {
+          icon: "lightning",
+          title: "Extensible Post-Processing Pipeline",
+          desc: "Delivers a fully functional, ready-to-code project immediately after generation.",
+          color: "yellow",
+          delay: 0.3,
+        },
+      ].map((feature, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: feature.delay }}
+          whileHover={{ y: -10, rotateX: 5, transition: { duration: 0.2 } }}
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          <Card className="p-8 bg-linear-gradient-to-br from-card to-secondary border-border hover:border-primary/50 transition-all duration-300 h-full group relative overflow-hidden">
+            <motion.div
+              className="absolute inset-0 bg-linear-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-primary/10 transition-all duration-500"
+              initial={{ opacity: 0 }}
+              whileHover={{ opacity: 1 }}
+            />
+            <motion.div
+              whileHover={{ rotate: 360, scale: 1.1 }}
+              transition={{ duration: 0.5 }}
+              className={`h-14 w-14 rounded-xl ${
+                feature.color === "primary"
+                  ? "bg-primary/20"
+                  : feature.color === "blue"
+                    ? "bg-blue-500/20"
+                    : feature.color === "red"
+                      ? "bg-red-500/20"
+                      : "bg-yellow-500/20"
+              } flex items-center justify-center mb-4 relative z-10`}
+            >
+              {feature.icon === "code" && (
+                <svg className="h-7 w-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6 2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
                   />
                 </svg>
-              </motion.div>
-              {[0, 90, 180, 270].map((angle) => (
-                <motion.div
-                  key={angle}
-                  className="absolute top-1/2 left-1/2 w-32 h-0.5 bg-gradient-to-r from-primary/50 to-transparent origin-left"
-                  style={{ rotate: angle }}
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.4 + angle * 0.001 }}
-                />
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Feature Cards */}
-          {[
-            {
-              icon: "code",
-              title: "Multi-Template & Multi-Language Support",
-              desc: "Enables developers to work across different technology stacks with a unified command interface.",
-              color: "primary",
-              delay: 0,
-            },
-            {
-              icon: "bulb",
-              title: "Interactive Configuration & Prompting",
-              desc: "Provides a user-friendly experience and minimizes errors from manual configuration.",
-              color: "blue",
-              delay: 0.1,
-            },
-            {
-              icon: "module",
-              title: "Component & Module Generation",
-              desc: "Significantly speeds up repetitive coding tasks and enforces best practices.",
-              color: "red",
-              delay: 0.2,
-            },
-            {
-              icon: "lightning",
-              title: "Extensible Post-Processing Pipeline",
-              desc: "Delivers a fully functional, ready-to-code project immediately after generation.",
-              color: "yellow",
-              delay: 0.3,
-            },
-          ].map((feature, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: feature.delay }}
-              whileHover={{ y: -10, rotateX: 5, transition: { duration: 0.2 } }}
-              style={{ transformStyle: "preserve-3d" }}
-              className={i < 2 ? "md:translate-y-[-80px]" : "md:translate-y-[80px]"}
-            >
-              <Card className="p-8 bg-linear-gradient-to-br from-card to-secondary border-border hover:border-primary/50 transition-all duration-300 h-full group relative overflow-hidden">
-                <motion.div
-                  className="absolute inset-0 bg-linear-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-primary/10 transition-all duration-500"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                />
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.5 }}
-                  className={`h-14 w-14 rounded-xl ${
-                    feature.color === "primary"
-                      ? "bg-primary/20"
-                      : feature.color === "blue"
-                        ? "bg-blue-500/20"
-                        : feature.color === "red"
-                          ? "bg-red-500/20"
-                          : "bg-yellow-500/20"
-                  } flex items-center justify-center mb-4 relative z-10`}
-                >
-                  {feature.icon === "code" && (
-                    <svg className="h-7 w-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                      />
-                    </svg>
-                  )}
-                  {feature.icon === "bulb" && (
-                    <svg className="h-7 w-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                      />
-                    </svg>
-                  )}
-                  {feature.icon === "module" && (
-                    <svg className="h-7 w-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 5a1 1 0 011-1h4a1 1 0 010 2H6v2a1 1 0 01-2 0V5zM4 13a1 1 0 011-1h2a1 1 0 110 2H5a1 1 0 01-1-1zm6-8a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1zm6 0a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z"
-                      />
-                    </svg>
-                  )}
-                  {feature.icon === "lightning" && (
-                    <svg className="h-7 w-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 10V3L4 14h7v7l9-11h-7z"
-                      />
-                    </svg>
-                  )}
-                </motion.div>
-                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors relative z-10">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed relative z-10">{feature.desc}</p>
-              </Card>
+              )}
+              {feature.icon === "bulb" && (
+                <svg className="h-7 w-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                  />
+                </svg>
+              )}
+              {feature.icon === "module" && (
+                <svg className="h-7 w-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 5a1 1 0 011-1h4a1 1 0 010 2H6v2a1 1 0 01-2 0V5zM4 13a1 1 0 011-1h2a1 1 0 110 2H5a1 1 0 01-1-1zm6-8a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1zm6 0a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z"
+                  />
+                </svg>
+              )}
+              {feature.icon === "lightning" && (
+                <svg className="h-7 w-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+              )}
             </motion.div>
-          ))}
-        </div>
-      </section>
+            <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors relative z-10">
+              {feature.title}
+            </h3>
+            <p className="text-muted-foreground text-sm leading-relaxed relative z-10">{feature.desc}</p>
+          </Card>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Testimonials Section */}
       <section className="py-20 relative overflow-hidden" id="testimonials">
@@ -2457,14 +2458,20 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
             <div>
               <div className="flex items-center gap-2 mb-6">
-                <motion.div
-                  className="h-8 w-8 rounded-lg bg-foreground flex items-center justify-center"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <span className="text-background font-bold text-lg">S</span>
-                </motion.div>
-                <span className="text-xl font-bold">ScaffoldGen</span>
+                 <motion.div
+              className="flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <Image
+                src="/images/scaffoldgen-logo.png"
+                alt="ScaffoldGen CLI"
+                width={160}
+                height={40}
+                className="h-10 w-auto"
+                priority
+              />
+            </motion.div>
               </div>
               <p className="text-sm text-muted-foreground">© 2025 ScaffoldGenCLI All rights reserved.</p>
             </div>

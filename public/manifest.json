@@ -1,0 +1,21 @@
+{
+  "name": "ScaffoldGen CLI",
+  "short_name": "ScaffoldGen",
+  "description": "A powerful command-line interface tool for developers",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#FF6B35",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
